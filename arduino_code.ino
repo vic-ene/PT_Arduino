@@ -21,12 +21,30 @@ void loop() {
   
   sensors_event_t event; 
   mma.getEvent(&event);
-  
-  Serial.print("0,0," + String(analogRead(0)));
-  Serial.print(",2,0," + String(event.acceleration.x)); 
-  Serial.print(",2,1," + String(event.acceleration.y)); 
-  Serial.println(",2,2," +String(event.acceleration.z)); 
 
-  delay(1000);
+  String time = "," + String(millis());
+
+
+ // Serial.print("-1,");
+  
+  // Temperature 
+  Serial.print("0,0," + String(analogRead(2))  + time + ",");
+  
+
+  // Strain gauge
+  Serial.print("1,0," + String(analogRead(0)) + time + ",");
+  Serial.print("1,1," + String(analogRead(1)) + time + ",");
+
+
+  // Accelerometer
+  Serial.print("2,0," + String(event.acceleration.x) + time + ","); 
+  Serial.print("2,1," + String(event.acceleration.y) + time + ","); 
+  Serial.print("2,2," +String(event.acceleration.z) + time); 
+  
+
+  
+  Serial.println();
+
+  delay(500);
   
 }
