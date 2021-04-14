@@ -19,7 +19,7 @@ File file;
 
 void setup(void) {
   Serial.begin(9600);
-
+  SD.begin(pinSD);
   mma.setRange(MMA8451_RANGE_8_G);
 
   if(mma.begin()){
@@ -57,13 +57,15 @@ void loop() {
    // Sends the values to processing
    Serial.println(newLine);
     
-   delay(500);
+   delay(100);
 }
 
 void writeToSdCard(String newLine){
+    //SD.begin(pinSD);
     file = SD.open(filename, FILE_WRITE);
     if(file){
       file.println(newLine);
+      Serial.println("Written");
       file.close();
    }
 }
